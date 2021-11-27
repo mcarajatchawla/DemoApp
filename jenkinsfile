@@ -1,4 +1,5 @@
 library "SharedLib"
+env.SONAR_HOST="http://localhost:9000/"
 node {
     stage("Startup"){
         repoClone("https://github.com/mcarajatchawla/DemoApp.git", "master")
