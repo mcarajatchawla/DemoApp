@@ -1,7 +1,7 @@
 library "SharedLib"
 node {
     stage("Startup"){
-        cleanWs()
+        //cleanWs()
     }
     stage("Maven Build"){
         mavenBuild()
@@ -16,6 +16,6 @@ node {
     }
 
     stage("Maven Pubish"){
-        
+
     }
 }
