@@ -4,17 +4,23 @@ env.NEXUS_REPO="my-app-nexus-repo"
 env.APP_GIT_URL="https://github.com/mcarajatchawla/DemoApp.git"
 env.APP_BRANCH="master"
 node {
+    // Initial stage to clone app repo and perform any other pre requisite operations
     stage("Startup"){
         repoClone(env.APP_GIT_URL, env.APP_BRANCH)
     }
+
+    // Perform maven build and junit test. Will fail if junit fails. 
+    // Publish junit results to jenkins dashboard
     stage("Maven Build"){
         mavenBuild()
     }
 
+    // Static code analysis using SonarQube
     stage("Code Analysis"){
         sonarScan()
     }
 
+    // Code Security analysis and open source scanning running in parallel
     stage("Security Analysis"){
         parallel(
             checkmarx: {
@@ -26,6 +32,7 @@ node {
         )
     }
 
+    // Pubish artifact to nexus repo
     stage("Pubish to Nexus"){
         nexusUpload(env.NEXUS_REPO)
     }
