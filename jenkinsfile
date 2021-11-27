@@ -1,9 +1,11 @@
 library "SharedLib"
 env.SONAR_HOST="http://localhost:9000/"
 env.NEXUS_REPO="my-app-nexus-repo"
+env.APP_GIT_URL="https://github.com/mcarajatchawla/DemoApp.git"
+env.APP_BRANCH="master"
 node {
     stage("Startup"){
-        repoClone(env.GIT_URL, env.GIT_BRANCH)
+        repoClone(env.APP_GIT_URL, env.APP_BRANCH)
     }
     stage("Maven Build"){
         mavenBuild()
