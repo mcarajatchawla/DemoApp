@@ -1,8 +1,9 @@
 library "SharedLib"
 env.SONAR_HOST="http://localhost:9000/"
+env.NEXUS_REPO="my-app-nexus-repo"
 node {
     stage("Startup"){
-        repoClone("https://github.com/mcarajatchawla/DemoApp.git", "master")
+        repoClone(env.GIT_URL, env.GIT_BRANCH)
     }
     stage("Maven Build"){
         mavenBuild()
@@ -23,7 +24,7 @@ node {
         )
     }
 
-    stage("Maven Pubish"){
-
+    stage("Pubish to Nexus"){
+        nexusUpload(env.NEXUS_REPO)
     }
 }
