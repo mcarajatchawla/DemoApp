@@ -12,7 +12,7 @@ node {
     }
 
     stage("Code Analysis"){
-        //sonarScan()
+        sonarScan()
     }
 
     stage("Security Analysis"){
