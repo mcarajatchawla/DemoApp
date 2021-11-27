@@ -1,7 +1,7 @@
 library "SharedLib"
 node {
     stage("Startup"){
-        //cleanWs()
+        repoClone("https://github.com/mcarajatchawla/DemoApp.git", "master")
     }
     stage("Maven Build"){
         mavenBuild()
