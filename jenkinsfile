@@ -13,7 +13,14 @@ node {
     }
 
     stage("Security Analysis"){
-
+        parallel(
+            checkmarx: {
+                checkmarxScan()
+            },
+            nexusIQ: {
+                nexusIQScan()
+            }
+        )
     }
 
     stage("Maven Pubish"){
